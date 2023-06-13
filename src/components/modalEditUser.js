@@ -1,28 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import {postCreateUser} from '../services/UserServices';
 import {toast } from 'react-toastify';
 
-const ModalAddNew = (props) => {
-    const {show,handleClose,handleUpdateTable} = props;
+const ModalEditUser = (props) => {
+    const {show,handleClose,dataUserEdit} = props;
     const [name,setName] = useState("");
-    const [job, setJob]= useState("");
+    const [job, setJob] = useState("");
 
-    const handleSaveUser = async () => {
-      let res = await postCreateUser(name,job);
-        if(res && res.id) {
-          //suress
-          handleClose();
-          setName('');
-          setJob('');
-          toast.success("ban da cap nhap thanh cong!");
-          handleUpdateTable({first_name: name, id: res.id});
-        }else {
-          //error
-          toast.error("ban da cap nhap That bai!");
-        }
+    const handleEditUser = () => {
+
     }
+
+    useEffect(() => {
+        if(show) {
+            setName(dataUserEdit.first_name);
+        }
+    },[dataUserEdit])
   return (
     <div
       className="modal show"
@@ -30,7 +25,7 @@ const ModalAddNew = (props) => {
     >
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Add New user</Modal.Title>
+          <Modal.Title>Edit a user</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <div className='body-add-new'>
@@ -59,8 +54,8 @@ const ModalAddNew = (props) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={() => handleSaveUser()}>
-            Save Changes
+          <Button variant="primary" onClick={() => handleEditUser()}>
+            Comfirm
           </Button>
         </Modal.Footer>
       </Modal>
@@ -68,7 +63,7 @@ const ModalAddNew = (props) => {
   );
 }
 
-export default ModalAddNew;
+export default ModalEditUser;
 
 
 
