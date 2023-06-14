@@ -4,6 +4,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
+import '../src/fontawesome-free-6.4.0-web/css/all.min.css'
 ReactDOM.render(
   <React.StrictMode>
     <App />
